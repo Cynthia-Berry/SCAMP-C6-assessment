@@ -11,10 +11,11 @@ const app = express();
 const port = 5000;
 const sequelize = require('./config/database');
 
+const User = require('./models/user.model');
 const indexRouter = require('./routes/index.route');
 const userRouter = require('./routes/user.route');
-
-const User = require('./models/user.model');
+const clientRouter = require('./routes/client.route');
+const invoiceRouter = require('./routes/invoice.route');
 
 sequelize.authenticate().then(() =>
     console.log('Connection has been established successfully.')
@@ -22,11 +23,14 @@ sequelize.authenticate().then(() =>
 
 //ROUTES
 app.use('/', indexRouter);
-app.use('/users', userRouter);
+app.use('/user', userRouter);
+app.use('/client', clientRouter);
+app.use('/invoice', invoiceRouter);
 
-const jane = User.build({ username: "Jane" });
+const jane = User.build({ username: "Jane" , password: "test123!"});
 console.log(jane instanceof User);
-console.log(jane.username); // "Jane"
+console.log(jane);
+console.log(jane.username, jane.password);
 
 
 app.listen(port, () =>

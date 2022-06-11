@@ -2,7 +2,7 @@ const {DataTypes} = require('sequelize');
 const db = require('../config/database');
 
 
-const userSchema = {
+const clientSchema = {
     id: {
         type: DataTypes.UUID,
         allowNull: false,
@@ -16,10 +16,6 @@ const userSchema = {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
     email: {
         type: DataTypes.STRING,
         allowNull: false
@@ -28,15 +24,12 @@ const userSchema = {
         type: DataTypes.STRING,
         allowNull: false
     },
-    password: {
-        type: DataTypes.STRING,
+    is_paid: {
+        type: DataTypes.BOOLEAN,
         allowNull: false
-    },
-    date_joined: {
-        type: DataTypes.DATE
     }
 }
 
-const User = db.define('UserModel', userSchema);
+const Client = db.define('ClientModel', clientSchema);
 
-module.exports = User;
+module.exports = Client;
