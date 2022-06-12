@@ -5,6 +5,7 @@ const db = require('../config/database');
 const userSchema = {
     id: {
         type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         allowNull: false,
         primaryKey: true
     },
@@ -19,6 +20,7 @@ const userSchema = {
     username: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
     },
     email: {
         type: DataTypes.STRING,
@@ -30,11 +32,8 @@ const userSchema = {
     },
     password: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
     },
-    date_joined: {
-        type: DataTypes.DATE
-    }
 }
 
 const User = db.define('UserModel', userSchema);

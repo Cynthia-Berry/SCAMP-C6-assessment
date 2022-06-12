@@ -6,13 +6,13 @@ const Joi = require("joi");
 const invoiceSchema = {
     id: {
         type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         allowNull: false,
         primaryKey: true
     },
     invoiceRef: {
         type: DataTypes.STRING,
         allowNull: false,
-
     },
     is_paid: {
         type: DataTypes.BOOLEAN,

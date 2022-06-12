@@ -27,9 +27,13 @@ const clientSchema = {
     is_paid: {
         type: DataTypes.BOOLEAN,
         allowNull: false
+    },
+    invoice_id: {
+        type: DataTypes.STRING,
+        foreignKey: true,
     }
 }
 
-const Client = db.define('ClientModel', clientSchema);
+const Client = db.define('ClientModel', clientSchema,);
 
 module.exports = Client;

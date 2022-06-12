@@ -22,7 +22,7 @@ const clientRecord = Joi.object({
 const invoiceRecord = Joi.object({
     invoiceId: Joi.string().required(),
     invoiceRef: Joi.string().required(),
-    balance: Joi.string().required(),
+    balance: Joi.number(),
     is_paid: Joi.string().required(),
     discount: Joi.string().email().required(),
     charge: Joi.string().max(15).required(),
