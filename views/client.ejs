@@ -5,14 +5,67 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel='stylesheet' href='/css/index.css'/>
+    <link rel='stylesheet' href='/css/grid.css'/>
 </head>
 <body>
+<header>
+    <nav class="topnav" id="myTopnav">
+        <a href="/">Home</a>
+        <a href="client">Clients</a>
+        <a href="user">User</a>
+        <a href="invoice">Invoice</a>
+        <a href="javascript:void(0);" class="icon" onclick="navView()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </nav>
+</header>
+<div class="container">
+    <div class="row">
+        <div class="col-25">
+            <p><strong>First Name</strong></p>
 
-<p><strong>First Name</strong> <%= client['firstName']%></p>
-<p><strong>Last Name</strong> <%= client['lastName']%></p>
-<p><strong>Email</strong> <%= client['email']%></p>
-<p><strong>Phone</strong> <%= client['phone']%></p>
-<p><strong>Is paid</strong> <%= client['is_paid']%></p>
+        </div>
+        <div class="col-75">
+            <p><%= client['firstName'] %></p>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25">
+            <p><strong>Last Name</strong></p>
+        </div>
+        <div class="col-75">
+            <p><%= client['lastName'] %></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25">
+            <p><strong>Email</strong></p>
+        </div>
+        <div class="col-75">
+            <p><%= client['email'] %></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25">
+            <p><strong>Phone</strong></p>
+        </div>
+        <div class="col-75">
+            <p><%= client['phone'] %></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25">
+            <p><strong>Is paid</strong></p>
+        </div>
+        <div class="col-75">
+            <p><%= client['is_paid'] %></p>
+        </div>
+    </div>
+</div>
+
+<script src="/js/index.js"></script>
 </body>
 </html>

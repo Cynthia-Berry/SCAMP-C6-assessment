@@ -20,25 +20,23 @@ const userRouter = require('./routes/user.route');
 const clientRouter = require('./routes/client.route');
 const invoiceRouter = require('./routes/invoice.route');
 
-// sequelize.authenticate().then(() =>
-//     console.log('Connection has been established successfully.')
-// ).catch(((error) => console.error('Unable to connect to the database:', error)));
+sequelize.authenticate().then(() =>
+    console.log('Connection has been established successfully.')
+).catch(((error) => console.error('Unable to connect to the database:', error)));
+
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
+
 //ROUTES
 app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/client', clientRouter);
 app.use('/invoice', invoiceRouter);
-
-
-const jane = User.build({ username: "Jane" , password: "test123!"});
-console.log(jane instanceof User);
-console.log(jane.username, jane.password);
 
 
 (async () => {

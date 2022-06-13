@@ -5,6 +5,7 @@ const db = require('../config/database');
 const clientSchema = {
     id: {
         type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         allowNull: false,
         primaryKey: true
     },
@@ -34,6 +35,6 @@ const clientSchema = {
     }
 }
 
-const Client = db.define('ClientModel', clientSchema,);
+const Client = db.define('client', clientSchema,);
 
 module.exports = Client;

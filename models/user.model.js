@@ -36,6 +36,6 @@ const userSchema = {
     },
 }
 
-const User = db.define('UserModel', userSchema);
+const User = db.define('user', userSchema);
 
 module.exports = User;

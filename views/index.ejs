@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-<!--    <link rel='stylesheet' href='/stylesheets/style.css' />-->
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel='stylesheet' href='/css/index.css'/>
+</head>
+<body>
+<header>
+    <nav class="topnav" id="myTopnav">
+        <a href="/" class="active">Home</a>
+        <a href="client">Clients</a>
+        <a href="user">User</a>
+        <a href="invoice">Invoice</a>
+        <a href="javascript:void(0);" class="icon" onclick="navView()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </nav>
+</header>
+<h1><%= title %></h1>
+<p>SheCodes-Africa assessment test - API Infrastructure to handle automated payment reminder.</p>
+
+SIGN UP ? SIGN IN
+
+
+<script src="/js/index.js"></script>
+</body>
 </html>

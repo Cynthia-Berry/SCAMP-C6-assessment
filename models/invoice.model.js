@@ -32,6 +32,6 @@ const invoiceSchema = {
     },
 }
 
-const Invoice = db.define('InvoiceModel', invoiceSchema);
+const Invoice = db.define('invoice', invoiceSchema);
 
 module.exports = Invoice;

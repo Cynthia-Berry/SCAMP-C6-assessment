@@ -1,18 +1,10 @@
 const express = require('express');
-const {toUUID} = require('to-uuid');
 const router = express.Router();
 const Client = require('../models/client.model');
 
 router.get('/', async (req, res) => {
-    // Fetch clients from database
     let clients = await Client.findAll();
-    //Set view data
-    let data = {
-        clients: clients
-    };
-    //Render the view
-    console.log(data)
-    res.render('clients', data);
+    res.render('clients', {clients: clients});
 });
 
 router.post('/create', async (req, res) => {
@@ -32,19 +24,15 @@ router.get('/:id', async (req, res) => {
 });
 
 router.patch('/:id', async (req, res) => {
-    const {firstName, lastName, email, phone} = req.body;
     await Client.create(req.body).save();
     res.render('client', {client: req.body});
 });
 
 router.delete('/:id', async (req, res) => {
-    console.log(req.params['id'])
     await Client.destroy({
-        where: {
-            id: req.params['id']
-        }
+        where: {id: req.params['id']}
     })
-    res.send(`Hello DELETE`);
+    res.render('client');
 });
 
 module.exports = router;

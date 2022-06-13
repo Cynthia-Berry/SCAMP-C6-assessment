@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const ejs = require('ejs')
-
 
 router.get('/', (req, res) => {
-  res.render('index', {title: 'Hello'});
+  res.render('index', {title: 'Payment Reminder Application'});
 });
 
 module.exports = router;
