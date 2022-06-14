@@ -22,6 +22,18 @@
     clear: both;
 }
 
+.errorPage {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.text-center{
+    text-align: center;
+}
+
 @media screen and (max-width: 600px) {
     .col-25, .col-75, input[type=submit] {
         width: 100%;

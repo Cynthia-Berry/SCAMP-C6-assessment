@@ -38,6 +38,10 @@ app.use('/user', userRouter);
 app.use('/client', clientRouter);
 app.use('/invoice', invoiceRouter);
 
+app.use((req, res, next) => {
+    res.status(404).render('error', {code: '404'});
+});
+
 
 (async () => {
     await sequelize.sync({ alter: true });
