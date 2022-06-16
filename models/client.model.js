@@ -19,20 +19,18 @@ const clientSchema = {
     },
     email: {
         type: DataTypes.STRING,
+        unique: true,
         allowNull: false
     },
     phone: {
         type: DataTypes.STRING,
+        unique: true,
         allowNull: false
     },
-    is_paid: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false
-    },
-    invoice_id: {
+    organization: {
         type: DataTypes.STRING,
-        foreignKey: true,
-    }
+        allowNull: false
+    },
 }
 
 const Client = db.define('client', clientSchema,);

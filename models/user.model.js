@@ -1,3 +1,4 @@
+const bcrypt = require("bcrypt");
 const {DataTypes} = require('sequelize');
 const db = require('../config/database');
 
@@ -17,11 +18,6 @@ const userSchema = {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-    },
     email: {
         type: DataTypes.STRING,
         allowNull: false
@@ -33,9 +29,19 @@ const userSchema = {
     password: {
         type: DataTypes.STRING,
         allowNull: false,
-    },
+    }
 }
 
-const User = db.define('user', userSchema);
+const User = db.define('user', userSchema, {
+    freezeTableName: true,
+    instanceMethods: {
+        generateHash(password) {
+            return bcrypt.hash(password, bcrypt.genSaltSync(10));
+        },
+        validPassword(password) {
+            return bcrypt.compare(password, this.password);
+        }
+    }
+});
 
 module.exports = User;

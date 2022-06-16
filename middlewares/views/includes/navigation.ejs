@@ -1,0 +1,12 @@
+<header>
+    <nav class="topnav" id="myTopnav">
+        <a href="/" class="<%= activePath === '/' ? 'active' : '' %>">Home</a>
+        <a href="/client" class="<%= activePath === 'client' ? 'active' : '' %>">Clients</a>
+        <a href="/invoice" class="<%= activePath === 'invoice' ? 'active' : '' %>">Invoice</a>
+        <a href="/auth/login" class="auth-nav<%= activePath === 'login' ? 'active' : '' %>">Login</a>
+        <a href="/auth/register" class="auth-nav<%= activePath === 'register' ? 'active' : '' %>">Register</a>
+        <a href="javascript:void(0);" class="icon" onclick="navView()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </nav>
+</header>

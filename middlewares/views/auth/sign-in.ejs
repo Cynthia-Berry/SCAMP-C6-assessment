@@ -1,0 +1,25 @@
+<%- include('../includes/head.ejs', {formCSS: true, gridCSS: false, indexCSS: true}) %>
+
+<body>
+<div class="auth">
+    <h2>Login</h2>
+
+    <form method="POST" action="/auth/login">
+        <label for="email" class="auth-label"><b>User Name</b></label>
+        <input type="email" name="email" id="email" placeholder="e.g example@gmail.com" class="form-control">
+        <br><br>
+        <label for="password" class="auth-label"><b>Password</b></label>
+        <input type="Password" name="password" id="password" placeholder="******" class="form-control">
+        <br><br>
+        <button type="submit" class="btn-primary mx-auto w-50">Login</button>
+
+        <div class="text-center">
+            <small>Don't have an account? <a href="/auth/register">Register.</a></small>
+        </div>
+    </form>
+</div>
+
+<%- include('../includes/script.ejs') %>
+
+</body>
+</html>

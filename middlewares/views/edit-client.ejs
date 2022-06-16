@@ -1,0 +1,80 @@
+<%- include('includes/head.ejs', {formCSS: true, gridCSS: true, indexCSS: true}) %>
+
+
+<body>
+<%- include('includes/navigation.ejs', {activePath: 'client'}) %>
+
+<div class="container">
+    <form action="/client/<% if (editMode) { %>edit<% } else { %>create<% } %>" method="POST">
+        <div class="row">
+            <div class="col-25">
+                <label for="fname">First Name</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="fname" name="firstName" placeholder="Your name.." class="form-control"
+                       value="<% if (editMode) { %><%= clients['firstName'] %><% } %>">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="lname">Last Name</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="lname" name="lastName" placeholder="Your last name.." class="form-control"
+                       value="<% if (editMode) { %><%= clients['lastName'] %><% } %>">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="email">Email</label>
+            </div>
+            <div class="col-75">
+                <input type="email" id="email" name="email" placeholder="Your email name.." class="form-control"
+                       value="<% if (editMode) { %><%= clients['email'] %><% } %>">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="phone">Phone</label>
+            </div>
+            <div class="col-75">
+                <input type="tel" id="phone" name="phone" placeholder="Your phone name.." class="form-control"
+                       value="<% if (editMode) { %><%= clients['phone'] %><% } %>">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="phone" hidden>is_paid</label>
+            </div>
+            <div class="col-75">
+                <input type="radio" id="yes" name="is_paid" value="true"
+                       checked="<% if (editMode && clients['is_paid']) { %><%= clients['is_paid'] %><% } else { %>true<% } %>">
+                <label for="is_paid">Yes</label>
+
+                <input type="radio" id="no" name="is_paid" value="false"
+                       checked=" <% if (editMode && !clients['is_paid']) { %><%= clients['is_paid'] %><% } else { %>true<% } %>">
+                <label for="is_paid">No</label>
+            </div>
+        </div>
+
+        <% if (editMode && id) { %>
+            <div>
+                <label for="id" hidden>Id</label>
+                <input type="hidden" id="id" name="id" placeholder="Your name.." hidden class="form-control"
+                       value="<%= id %>">
+            </div>
+        <% } %>
+
+        <div class="row">
+            <button type="submit" class="btn-primary mx-auto w-50">
+                <% if (editMode) { %>Update Client
+                <% } else { %> Add Client
+                <% } %>
+            </button>
+        </div>
+    </form>
+</div>
+
+<script src="/js/index.js"></script>
+</body>
+</html>

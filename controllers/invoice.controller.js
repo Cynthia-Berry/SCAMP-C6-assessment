@@ -2,7 +2,7 @@ const Invoice = require("../models/invoice.model");
 
 const getInvoice = async (req, res) => {
     let invoices = await Invoice.findAll();
-    res.render('invoice', {invoices: invoices});
+    res.render('invoice', {invoices: invoices, editMode: false});
 };
 
 const createInvoice = async (req, res) => {
@@ -16,15 +16,22 @@ const getInvoiceById = async (req, res) => {
 
 };
 
-const updateInvoice = (req, res) => {
-    res.send(`Hello UPDATE`);
+const updateInvoice = async (req, res) => {
+    await Invoice.findByPk(req.params['id']).then(invoice => {
+        invoice.save();
+
+    }).then(result => {
+        res.render('invoice', {invoices: [result]});
+    });
 };
 
 const deleteInvoice = async (req, res) => {
-    await Invoice.destroy({
-        where: {id: req.params['id']}
-    })
-    res.render('invoice');
+    await Invoice.findByPk(req.params['id']).then(invoice => {
+        return invoice.destroy();
+    }).then(() => {
+        console.log('INVOICE IS DELETED')
+        res.redirect('/invoice');
+    });
 };
 
 module.exports = {

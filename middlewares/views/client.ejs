@@ -1,0 +1,40 @@
+<body>
+<%- include('edit-client.ejs', {editMode: false}) %>
+
+<% if(clients.length > 0) { %>
+    <div id="tableLayout">
+        <table>
+            <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Is Paid</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% for(let i = 0; i < clients.length; i++) { %>
+                <tr>
+                    <td><%= clients[i]['firstName'] %></td>
+                    <td><%= clients[i]['lastName'] %></td>
+                    <td><%= clients[i]['email'] %></td>
+                    <td><%= clients[i]['phone'] %></td>
+                    <td><%= clients[i]['is_paid'] %></td>
+                    <td>
+                        <a href="/client/<%= clients[i]['id'] %>?edit=true">
+                            <button class="btn-primary">Edit</button>
+                        </a>
+                        <button type="submit" class="btn-danger">Delete</button>
+                    </td>
+                </tr>
+            <% } %>
+            </tbody>
+        </table>
+    </div>
+<% } %>
+<%- include('includes/script.ejs') %>
+
+</body>
+</html>

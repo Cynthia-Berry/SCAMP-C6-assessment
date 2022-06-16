@@ -1,15 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const {getClient, createClient, getClientById, updateClient, deleteClient} = require('../controllers/client.controller')
+const validator = require('../middlewares/helpers/validators/validator.service')
+const ClientController = require('../controllers/client.controller');
 
-router.get('/', getClient);
 
-router.post('/create', createClient);
+router.get('/', ClientController.getClient);
 
-router.get('/:id', getClientById);
+router.post('/create', validator("validators", "clientRecord"), ClientController.createClient);
 
-router.patch('/:id', updateClient);
+router.get('/:id', ClientController.getClientById);
 
-router.delete('/:id', deleteClient);
+router.patch('/:id', ClientController.updateClient);
+
+router.delete('/:id', ClientController.deleteClient);
 
 module.exports = router;

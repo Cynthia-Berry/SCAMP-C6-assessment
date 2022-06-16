@@ -1,0 +1,191 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Payment Reminder Application",
+    "description": "SheCodes-Africa assessment test - API Infrastructure to handle automated payment reminder.",
+    "version": "v1",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "externalDocs": {
+    "url": "/",
+    "description": "Find more info here"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000",
+      "description": "Localhost || Development Environment"
+    }
+  ],
+  "paths": {
+    "/client": {
+      "get": {
+        "tags": [
+          "Client Services"
+        ],
+        "summary": "Client Service to fetch all blogs",
+        "responses": {
+          "200": {
+            "description": "Client fetched successful"
+          }
+        },
+        "security": [
+          {
+            "Auth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ]
+      }
+    },
+    "/client/create": {
+      "post": {
+        "tags": [
+          "Client Services"
+        ],
+        "summary": "API to create a client",
+        "responses": {
+          "200": {
+            "description": "Client created successfully"
+          }
+        },
+        "security": [
+          {
+            "Auth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Client"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/client/:id": {
+      "post": {
+        "tags": [
+          "Client Services"
+        ],
+        "summary": "API to edit client information",
+        "responses": {
+          "200": {
+            "description": "Client updated successfully"
+          }
+        },
+        "security": [
+          {
+            "Auth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Client"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "Auth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "JWT Authorization header using the JWT scheme. Enter your JWT token in the text input below. Example: 'JWT token'"
+      }
+    },
+    "responses": {
+      "Unauthorized": {
+        "description": "Error occurred, not authorised to view this resource"
+      }
+    },
+    "schemas": {
+      "Client": {
+        "required": [
+          "firstName",
+          "lastName",
+          "email",
+          "phone",
+          "organization"
+        ],
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "organization": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateClient": {
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "organization": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
