@@ -9,7 +9,9 @@ global.version = 'v1';
 global.patchVersion = 'v1.0.0';
 
 const port = process.env.PORT || 5000;
-const sequelize = require('./config/database');
+const sequelize = require('./middlewares/config/database');
+const swaggerDocument = require('./middlewares/utils/swagger.json');
+
 const User = require('./models/user.model');
 const Client = require('./models/client.model');
 const Invoice = require('./models/invoice.model');
@@ -18,20 +20,18 @@ const indexRouter = require('./routes/index.route');
 const userRouter = require('./routes/user.route');
 const clientRouter = require('./routes/client.route');
 const invoiceRouter = require('./routes/invoice.route');
-const swaggerDocument = require('./middlewares/utils/swagger.json');
 
 
 const app = express();
 
-
-// view engine setup
+/**** VIEW ENGIN SETUP ****/
 app.set('views', path.join(__dirname, 'middlewares/views'));
 app.set('view engine', 'ejs');
 app.use(express.json({limit: '50mb', extended: true}));
 app.use(express.urlencoded({limit: '50mb', extended: true}));
 app.use(express.static(path.join(__dirname, 'middlewares/public')));
 
-//ROUTES
+/**** ROUTES ****/
 app.use('/auth', authRouter)
 app.use('/', indexRouter);
 app.use('/user', userRouter);
@@ -40,7 +40,7 @@ app.use('/invoice', invoiceRouter);
 app.use(`/api-doc`, swaggerUi.serve);
 app.get(`/api-doc`, swaggerUi.setup(swaggerDocument, false, {"docExpansion": 'none'}));
 
-app.use((req, res, next) => {
+app.use((req, res) => {
     res.status(404).render('error', {code: '404'});
 });
 
@@ -58,8 +58,8 @@ app.use((error, req, res, next) => {
     res['render']('error', {header: '404 Not Found', message: 'Use discovery service'});
     next();
 });
-//A user created the invoice. When a user is deleted, all invoice related to him should delete
 
+/**** DATABASE TABLE RELATIONSHIP ****/
 // create relationship between users and invoice
 Invoice.belongsTo(User, {constraints: true, onDelete: 'SET NULL'});
 User.hasMany(Invoice);

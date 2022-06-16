@@ -1,10 +1,12 @@
 const Client = require("../models/client.model");
-const errorCodes = require("../middlewares/helpers/enum/errorCodes.enum")
+const errorCodes = require("../middlewares/helpers/enums/errorCodes.enum");
+const ClientResponse = require('../middlewares/helpers/responses/client.response')
 
 const getClient = (req, res) => {
     Client.findAll()
         .then(clients => {
-            res.status(200).json({data: clients, status: "SUCCESS", message: "Successfully fetched all clients"});
+            const response = ClientResponse.getClientResponse();
+            res.status(response.status).json({data: clients, status: response.type, message: response.message});
         })
         .catch((error) => {
             const response = error.errors[0]
@@ -14,7 +16,8 @@ const getClient = (req, res) => {
 
 const createClient = (req, res) => {
     Client.create(req.body).then((client) => {
-        res.status(200).json({data: client, status: "SUCCESS", message: "Successfully created client"});
+        const response = ClientResponse.createClientResponse();
+        res.status(response.status).json({data: client, status: response.type, message: response.message});
     }).catch(error => {
         const response = error.errors[0]
         res.status(errorCodes.Error400.code).json({status: errorCodes.Error400.type, message: response.message});
@@ -23,23 +26,28 @@ const createClient = (req, res) => {
 
 const getClientById = (req, res) => {
     Client.findByPk(req.params['id']).then(client => {
-        res.status(200)
+        const response = ClientResponse.getClientResponse();
+        res.status(response.status).json({data: client, status: response.type, message: response.message});
     }).catch(error => {
         const response = error.errors[0]
         res.status(errorCodes.Error400.code).json({status: errorCodes.Error400.type, message: response.message});
     })
 };
 
-
 const updateClient = async (req, res) => {
     try {
         const client = await Client.update(req.body, {
             where: {id: req.params['id']}
-        })
+        });
         if (!client) {
             res.status(errorCodes.Error400.code).json({status: errorCodes.Error400.type, message: ''});
         } else {
-            res.status(200).json({data: await Client.findByPk(req.params['id']), status: "SUCCESS", message: "Successfully updated client"});
+            const response = ClientResponse.getClientResponse();
+            res.status(response.status).json({
+                data: await Client.findByPk(req.params['id']),
+                status: response.type,
+                message: response.message
+            });
         }
     } catch (e) {
         console.log(e);
@@ -49,11 +57,12 @@ const updateClient = async (req, res) => {
 };
 
 const deleteClient = (req, res) => {
-  Client.findByPk(req.params['id']).then(async response => {
+    Client.findByPk(req.params['id']).then(async resp => {
         await Client.destroy({
-            where: {id: response.id}
+            where: {id: resp.id}
         });
-        res.status(204).json({status: "SUCCESS", message: "Successfully deleted client"});
+        const response = ClientResponse.deleteClientResponse();
+        res.status(response.status).json({status: response.type, message: response.message});
     }).catch(error => {
         console.log(error)
     });

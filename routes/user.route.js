@@ -1,28 +1,17 @@
 const express = require('express');
 const router = express.Router();
+const UserController = require("../controllers/user.controller");
+const validator = require("../middlewares/helpers/validators/validator.service");
 
-const User = require('../models/user.model');
 
+router.get('/', UserController.getUser);
 
-router.get('/', async (req, res) => {
-    const users = await User.findAll();
-    res.render('user', {users: users});
-});
+router.post('/create', validator("validators", "userRecord"), UserController.createUser);
 
-router.post('/', (req, res) => {
-    res.send(`Hello POST ${req.body}`);
-});
+router.get('/:id', UserController.getUserById);
 
-router.get('/:id', (req, res) => {
-    res.send(`Hello GET BY ID`);
-});
+router.patch('/:id',validator("validators", "userRecord"), UserController.updateUser);
 
-router.patch('/:id', (req, res) => {
-    res.send(`Hello UPDATE`);
-});
-
-router.delete('/:id', (req, res) => {
-    res.send(`Hello DELETE`);
-});
+router.delete('/:id', UserController.deleteUser);
 
 module.exports = router;

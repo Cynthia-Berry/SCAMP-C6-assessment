@@ -1,5 +1,5 @@
 const createError = require('http-errors');
-const errorCodes = require("../enum/errorCodes.enum");
+const errorCodes = require("../enums/errorCodes.enum");
 const validators = require('../validators/app.validator');
 
 

@@ -1,16 +1,17 @@
 const express = require('express');
 const router = express.Router();
+const  InvoiceController = require('../controllers/invoice.controller')
+const validator = require("../middlewares/helpers/validators/validator.service");
 
-const {getInvoice, createInvoice, getInvoiceById, updateInvoice, deleteInvoice} = require('../controllers/invoice.controller')
 
-router.get('/', getInvoice);
+router.get('/', InvoiceController.getInvoice);
 
-router.post('/', createInvoice);
+router.post('/create', validator("validators", "invoiceRecord"), InvoiceController.createInvoice);
 
-router.get('/:id', getInvoiceById);
+router.get('/:id', InvoiceController.getInvoiceById);
 
-router.patch('/:id', updateInvoice);
+router.patch('/:id',validator("validators", "invoiceRecord"), InvoiceController.updateInvoice);
 
-router.delete('/:id', deleteInvoice);
+router.delete('/:id', InvoiceController.deleteInvoice);
 
 module.exports = router;

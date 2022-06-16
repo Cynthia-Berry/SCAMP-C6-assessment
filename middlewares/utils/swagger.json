@@ -25,7 +25,7 @@
         "tags": [
           "Client Services"
         ],
-        "summary": "Client Service to fetch all blogs",
+        "summary": "API to fetch all clients",
         "responses": {
           "200": {
             "description": "Client fetched successful"
@@ -56,6 +56,44 @@
         ]
       }
     },
+    "/client/:id": {
+      "get": {
+        "tags": [
+          "Client Services"
+        ],
+        "summary": "API to get a client information",
+        "responses": {
+          "200": {
+            "description": "Client fetched successfully"
+          }
+        },
+        "security": [
+          {
+            "Auth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Client"
+              }
+            }
+          }
+        }
+      }
+    },
     "/client/create": {
       "post": {
         "tags": [
@@ -84,12 +122,12 @@
         }
       }
     },
-    "/client/:id": {
-      "post": {
+    "/client/update": {
+      "patch": {
         "tags": [
           "Client Services"
         ],
-        "summary": "API to edit client information",
+        "summary": "API to edit a client",
         "responses": {
           "200": {
             "description": "Client updated successfully"
@@ -100,22 +138,12 @@
             "Auth": []
           }
         ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Client"
+                "$ref": "#/components/schemas/UpdateClient"
               }
             }
           }

@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const {DataTypes} = require('sequelize');
-const db = require('../config/database');
+const db = require('../middlewares/config/database');
 
 
 const userSchema = {
