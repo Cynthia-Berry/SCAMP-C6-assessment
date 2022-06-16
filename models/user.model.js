@@ -29,7 +29,11 @@ const userSchema = {
     password: {
         type: DataTypes.STRING,
         allowNull: false,
-    }
+    },
+    jobTitle: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
 }
 
 const User = db.define('user', userSchema, {

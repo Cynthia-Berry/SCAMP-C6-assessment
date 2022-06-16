@@ -5,6 +5,7 @@ const userRecord = Joi.object({
     lastName: Joi.string().required(),
     email: Joi.string().email().required(),
     phone: Joi.string().max(15).required(),
+    jobTitle: Joi.string().required(),
     password: Joi.string().min(8).required().messages({
         "string.min": `Password should have a minimum length of 8 characters`,
         "string.base": `Password should have an uppercase, lowercase and digit`,
@@ -25,10 +26,10 @@ const clientRecord = Joi.object({
 
 const invoiceRecord = Joi.object({
     invoiceRef: Joi.string().required(),
+    is_paid: Joi.boolean().required(),
+    charge: Joi.number().precision(2).required(),
+    discount: Joi.number().precision(2).max(100),
     balance: Joi.number(),
-    is_paid: Joi.string().required(),
-    discount: Joi.string().email().required(),
-    charge: Joi.string().max(15).required(),
 });
 
 module.exports = {userRecord, clientRecord, invoiceRecord};

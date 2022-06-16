@@ -28,7 +28,7 @@
         "summary": "API to fetch all clients",
         "responses": {
           "200": {
-            "description": "Client fetched successful"
+            "description": "Clients fetched successfully"
           }
         },
         "security": [
@@ -122,7 +122,7 @@
         }
       }
     },
-    "/client/update": {
+    "/client/:clientId": {
       "patch": {
         "tags": [
           "Client Services"
@@ -144,6 +144,266 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/UpdateClient"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/invoice": {
+      "get": {
+        "tags": [
+          "Invoice Services"
+        ],
+        "summary": "API to fetch all invoices",
+        "responses": {
+          "200": {
+            "description": "Invoices fetched successfully"
+          }
+        },
+        "security": [
+          {
+            "Auth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ]
+      }
+    },
+    "/invoice/:id": {
+      "get": {
+        "tags": [
+          "Invoice Services"
+        ],
+        "summary": "API to get a invoice",
+        "responses": {
+          "200": {
+            "description": "Invoice fetched successfully"
+          }
+        },
+        "security": [
+          {
+            "Auth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Client"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/invoice/create": {
+      "post": {
+        "tags": [
+          "Invoice Services"
+        ],
+        "summary": "API to create a invoice",
+        "responses": {
+          "200": {
+            "description": "Invoice created successfully"
+          }
+        },
+        "security": [
+          {
+            "Auth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Invoice"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/invoice/:invoiceId": {
+      "patch": {
+        "tags": [
+          "Invoice Services"
+        ],
+        "summary": "API to edit a invoice",
+        "responses": {
+          "200": {
+            "description": "Invoice updated successfully"
+          }
+        },
+        "security": [
+          {
+            "Auth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInvoice"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user": {
+      "get": {
+        "tags": [
+          "User Services"
+        ],
+        "summary": "API to fetch all users",
+        "responses": {
+          "200": {
+            "description": "Users fetched successfully"
+          }
+        },
+        "security": [
+          {
+            "Auth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ]
+      }
+    },
+    "/user/:id": {
+      "get": {
+        "tags": [
+          "User Services"
+        ],
+        "summary": "API to get a user information",
+        "responses": {
+          "200": {
+            "description": "User fetched successfully"
+          }
+        },
+        "security": [
+          {
+            "Auth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/create": {
+      "post": {
+        "tags": [
+          "User Services"
+        ],
+        "summary": "API to create a user",
+        "responses": {
+          "200": {
+            "description": "User created successfully"
+          }
+        },
+        "security": [
+          {
+            "Auth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/:userId": {
+      "patch": {
+        "tags": [
+          "User Services"
+        ],
+        "summary": "API to edit a user",
+        "responses": {
+          "200": {
+            "description": "User updated successfully"
+          }
+        },
+        "security": [
+          {
+            "Auth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUser"
               }
             }
           }
@@ -211,6 +471,107 @@
           },
           "userId": {
             "type": "string"
+          }
+        }
+      },
+      "Invoice": {
+        "required": [
+          "invoiceRef",
+          "is_paid",
+          "charge"
+        ],
+        "properties": {
+          "invoiceRef": {
+            "type": "string",
+            "maxLength": 10
+          },
+          "is_paid": {
+            "type": "boolean"
+          },
+          "charge": {
+            "type": "number"
+          },
+          "discount": {
+            "type": "number"
+          },
+          "balance": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateInvoice": {
+        "properties": {
+          "invoiceRef": {
+            "type": "string",
+            "maxLength": 10
+          },
+          "is_paid": {
+            "type": "boolean"
+          },
+          "charge": {
+            "type": "number"
+          },
+          "discount": {
+            "type": "number"
+          },
+          "balance": {
+            "type": "string"
+          }
+        }
+      },
+      "User": {
+        "required": [
+          "firstName",
+          "lastName",
+          "email",
+          "phone",
+          "jobTitle",
+          "password"
+        ],
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string",
+            "maxLength": 15
+          },
+          "jobTitle": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string",
+            "maxLength": 8
+          }
+        }
+      },
+      "UpdateUser": {
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string",
+            "maxLength": 15
+          },
+          "jobTitle": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string",
+            "maxLength": 8
           }
         }
       }

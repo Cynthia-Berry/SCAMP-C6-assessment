@@ -1,6 +1,5 @@
 const {DataTypes} = require('sequelize');
 const db = require('../middlewares/config/database');
-const Joi = require("joi");
 
 
 const invoiceSchema = {
@@ -12,6 +11,7 @@ const invoiceSchema = {
     },
     invoiceRef: {
         type: DataTypes.STRING,
+        unique: true,
         allowNull: false,
     },
     is_paid: {
