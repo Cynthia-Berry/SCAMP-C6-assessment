@@ -1,9 +1,9 @@
 //SOURCE: https://www.freecodecamp.org/news/how-to-authenticate-users-and-implement-cors-in-nodejs-applications/
 const bcrypt = require("bcrypt"), jwt = require("jsonwebtoken");
+const Token = require("../models/auth.model");
 const UserModel = require('../models/user.model');
 const userController = require('./user.controller');
-const AuthResponse = require("../middlewares/helpers/responses/auth.response");
-const User = require("../models/user.model");
+const AuthResponse = require("../middlewares/helpers/responses/token.response");
 const UserResponse = require("../middlewares/helpers/responses/user.response");
 
 const signIn = (req, res) => {
@@ -22,7 +22,8 @@ const signIn = (req, res) => {
           {user_id: user.id}, process.env.TOKEN_KEY, {expiresIn: "5h"}
         );
 
-        await User.update({token: userToken}, {where: {id: user.id}});
+        await Token.update({token: userToken}, {where: {userId: user.id}});
+
         user.token = userToken;
         res.status(response.status).json({
           token: user.token, status: response.type, message: response.message
@@ -31,8 +32,7 @@ const signIn = (req, res) => {
     });
 
   } catch (error) {
-    console.log(error)
-    const response = UserResponse.getUserError(error.errors[0].message)
+    const response = UserResponse.getUserError(error.errors[0].message);
     res.status(response.status).json({status: response.type, message: response.message});
   }
 };

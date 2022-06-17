@@ -1,6 +1,7 @@
 const Client = require("../models/client.model");
 const errorCodes = require("../middlewares/helpers/enums/errorCodes.enum");
 const ClientResponse = require('../middlewares/helpers/responses/client.response')
+const UserResponse = require("../middlewares/helpers/responses/user.response");
 
 const getClient = (req, res) => {
     Client.findAll()
@@ -50,7 +51,6 @@ const updateClient = async (req, res) => {
             });
         }
     } catch (e) {
-        console.log(e);
         const response = e.errors[0]
         res.status(errorCodes.Error400.code).json({status: errorCodes.Error400.type, message: response.message});
     }
@@ -64,8 +64,8 @@ const deleteClient = (req, res) => {
         const response = ClientResponse.deleteClientResponse();
         res.status(response.status).json({status: response.type, message: response.message});
     }).catch(error => {
-        console.log(error)
-    });
+   const response = UserResponse.getUserError(error.errors[0].message);
+    res.status(response.status).json({status: response.type, message: response.message});    });
 };
 
 module.exports = {

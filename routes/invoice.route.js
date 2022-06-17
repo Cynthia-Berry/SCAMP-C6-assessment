@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const  InvoiceController = require('../controllers/invoice.controller')
 const InputValidator = require("../middlewares/helpers/validators/validator.service");
-const AuthValidator = require("../middlewares/helpers/validators/auth.validator");
+const AuthValidator = require("../middlewares/helpers/validators/token.validator");
 
 
 router.get(

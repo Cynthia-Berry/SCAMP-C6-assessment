@@ -1,4 +1,3 @@
-const bcrypt = require("bcrypt");
 const {DataTypes} = require('sequelize');
 const db = require('../middlewares/config/database');
 
@@ -37,10 +36,7 @@ const userSchema = {
   jobTitle: {
     type: DataTypes.STRING,
     allowNull: false
-  },
-  token: {
-    type: DataTypes.STRING,
-  },
+  }
 }
 
 const User = db.define('user', userSchema);

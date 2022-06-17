@@ -37,11 +37,14 @@ const clientRecord = Joi.object({
 });
 
 const invoiceRecord = Joi.object({
-  invoiceRef: Joi.string(),
-  is_paid: Joi.boolean().required(),
+  invoiceRef: Joi.string().max(12),
+  userId: Joi.string().required(),
+  clientId: Joi.string().required(),
   charge: Joi.number().precision(2).required(),
+  is_paid: Joi.boolean(),
   discount: Joi.number().precision(2).max(100),
   balance: Joi.number(),
+
 });
 
 module.exports = {loginValidator, userRecord, clientRecord, invoiceRecord};

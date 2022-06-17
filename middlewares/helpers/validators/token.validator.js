@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const AuthResponse = require("../responses/auth.response");
+const AuthResponse = require("../responses/token.response");
 const config = process.env;
 
 const verifyToken = (req, res, next) => {

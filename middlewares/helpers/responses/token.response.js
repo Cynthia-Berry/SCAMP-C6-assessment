@@ -30,9 +30,10 @@ const invalidTokenError = () => {
   };
 };
 
+
 module.exports = {
   logInError,
   userLoginResponse,
   authenticationError,
-  invalidTokenError
+  invalidTokenError,
 }
