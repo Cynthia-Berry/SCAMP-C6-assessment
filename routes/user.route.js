@@ -2,16 +2,32 @@ const express = require('express');
 const router = express.Router();
 const UserController = require("../controllers/user.controller");
 const validator = require("../middlewares/helpers/validators/validator.service");
+const AuthValidator = require("../middlewares/helpers/validators/auth.validator");
 
 
-router.get('/', UserController.getUser);
+router.get('/',
+  AuthValidator.verifyToken,
+  UserController.getUser
+);
 
-router.post('/create', validator("validators", "userRecord"), UserController.createUser);
+router.post(
+  validator("validators", "userRecord"),
+  UserController.createUser
+);
 
-router.get('/:id', UserController.getUserById);
+router.get(
+  '/:id',
+  AuthValidator.verifyToken,
+  UserController.getUserById
+);
 
-router.patch('/:id',validator("validators", "userRecord"), UserController.updateUser);
+router.patch(
+  '/:id',
+  AuthValidator.verifyToken,
+  validator("validators", "userRecord"),
+  UserController.updateUser
+);
 
-router.delete('/:id', UserController.deleteUser);
+router.delete('/:id',AuthValidator.verifyToken, UserController.deleteUser);
 
 module.exports = router;

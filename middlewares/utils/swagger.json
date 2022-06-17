@@ -476,7 +476,6 @@
       },
       "Invoice": {
         "required": [
-          "invoiceRef",
           "is_paid",
           "charge"
         ],
@@ -503,7 +502,7 @@
         "properties": {
           "invoiceRef": {
             "type": "string",
-            "maxLength": 10
+            "maxLength": 16
           },
           "is_paid": {
             "type": "boolean"

@@ -1,21 +1,11 @@
 const express = require('express');
+const validator = require("../middlewares/helpers/validators/validator.service");
+const {signIn, signUp} = require("../controllers/auth.controller");
 const router = express.Router();
 
-router.get('/register', (req, res) => {
-    res.render('auth/sign-up');
-});
 
-router.post('/register', (req, res) => {
-    res.redirect('/');
-});
+router.post('/register', signUp);
 
-router.get('/login', (req, res) => {
-    res.render('auth/sign-in');
-});
-
-router.post('/login', (req, res) => {
-  req.body
-    res.redirect('/');
-});
+router.post('/login', validator("validators", "loginValidator"), signIn);
 
 module.exports = router;

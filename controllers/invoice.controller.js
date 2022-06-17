@@ -1,6 +1,8 @@
 const Invoice = require("../models/invoice.model");
 const InvoiceResponse = require("../middlewares/helpers/responses/invoice.response");
 const errorCodes = require("../middlewares/helpers/enums/errorCodes.enum");
+// const {invoiceRefGenerator} = require("../middlewares/utils/char.generator");
+
 
 const getInvoice = (req, res) => {
     Invoice.findAll()
@@ -15,13 +17,18 @@ const getInvoice = (req, res) => {
 };
 
 const createInvoice = (req, res) => {
-    Invoice.create(req.body).then((invoice) => {
-        const response = InvoiceResponse.createInvoiceResponse();
-        res.status(response.status).json({data: invoice, status: response.type, message: response.message});
-    }).catch(error => {
-        const response = error.errors[0]
-        res.status(errorCodes.Error400.code).json({status: errorCodes.Error400.type, message: response.message});
-    });
+    // console.log(req.body);
+    const invoiceRef = invoiceRefGenerator(req.body);
+    // console.log(invoiceRef);
+    // const reqBody = [invoiceRef, req.body['is_paid'], req.body['discount'], req.body['charge'], req.body['balance']];
+
+    // Invoice.create(reqBody).then((invoice) => {
+    //     const response = InvoiceResponse.createInvoiceResponse();
+    //     res.status(response.status).json({data: invoice, status: response.type, message: response.message});
+    // }).catch(error => {
+    //     const response = error.errors[0]
+    //     res.status(errorCodes.Error400.code).json({status: errorCodes.Error400.type, message: response.message});
+    // });
 };
 
 const getInvoiceById = (req, res) => {

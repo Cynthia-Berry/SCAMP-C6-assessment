@@ -8,7 +8,7 @@ module.exports = new Sequelize(process.env.POSTGRES_DATABASE, process.env.POSTGR
     pool: {
         max: 5,
         min:0,
-        acquire: 30000,
-        idle: 10000
+        acquire: 10000,
+        idle: 5000
     },
 });
