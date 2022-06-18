@@ -1,5 +1,5 @@
 const Client = require("../models/client.model");
-const errorCodes = require("../middlewares/helpers/enums/errorCodes.enum");
+const errorCodes = require("../middlewares/enums/errorCodes.enum");
 const ClientResponse = require('../middlewares/helpers/responses/client.response')
 const UserResponse = require("../middlewares/helpers/responses/user.response");
 

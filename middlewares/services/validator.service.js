@@ -1,6 +1,6 @@
 const createError = require('http-errors');
 const errorCodes = require("../enums/errorCodes.enum");
-const validators = require('../validators/app.validator');
+const validators = require('../helpers/validators/app.validator');
 
 
 module.exports = (validatorType, method) => {

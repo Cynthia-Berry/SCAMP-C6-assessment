@@ -1,5 +1,5 @@
-const successCodes = require("../enums/successCodes.enum");
-const errorCodes = require("../enums/errorCodes.enum");
+const successCodes = require("../../enums/successCodes.enum");
+const errorCodes = require("../../enums/errorCodes.enum");
 
 
 const getInvoiceResponse = () => {

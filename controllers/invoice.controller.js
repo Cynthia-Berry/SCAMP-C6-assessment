@@ -2,9 +2,10 @@ const Invoice = require("../models/invoice.model");
 const User = require("../models/user.model");
 const Client = require("../models/client.model");
 const InvoiceResponse = require("../middlewares/helpers/responses/invoice.response");
-const errorCodes = require("../middlewares/helpers/enums/errorCodes.enum");
 const UserResponse = require("../middlewares/helpers/responses/user.response");
+const errorCodes = require("../middlewares/enums/errorCodes.enum");
 const {invoiceRefGenerator} = require("../middlewares/utils/char.generator");
+const {messagingService} = require('../middlewares/services/messageing.service')
 
 const getInvoice = (req, res) => {
   Invoice.findAll()
@@ -35,7 +36,7 @@ const createInvoice = async (req, res) => {
         const invoiceRef = invoiceRefGenerator(client.organization.replace(/\s+/g, ''));
         const reqBody = {
           invoiceRef: invoiceRef,
-          is_paid: req.body['is_paid'],
+          is_paid: false,
           discount: req.body['discount'],
           charge: req.body['charge'],
           balance: req.body['balance'],
@@ -43,8 +44,33 @@ const createInvoice = async (req, res) => {
           clientId: client.id
         };
 
-        Invoice.create(reqBody).then((invoice) => {
+        Invoice.create(reqBody).then(async invoice => {
           const response = InvoiceResponse.createInvoiceResponse();
+          const dataObject = {
+            sender: {
+              firstName: user['firstName'],
+              lastName: user['lastName'],
+              email: user['email'],
+              phone: user['phone']
+            },
+            receiver: {
+              firstName: client['firstName'],
+              lastName: client['lastName'],
+              email: client['email'],
+              phone: client['phone']
+            },
+            subject: `Payment Reminder: Invoice (${invoice['invoiceRef']})`
+          };
+          const invoiceObject = {
+            invoiceRef: invoice['invoiceRef'],
+            charge: invoice['charge'],
+            discount: invoice['discount'],
+            balance: invoice['balance'],
+            payableFrom: client['organization'],
+            datePayable: new Date(new Date() + 7 * 24*60*60*1000)
+          };
+
+          await messagingService(invoiceObject, dataObject);
           res.status(response.status).json({data: invoice, status: response.type, message: response.message});
         });
       })

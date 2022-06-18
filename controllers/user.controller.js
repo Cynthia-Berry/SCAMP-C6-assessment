@@ -66,7 +66,7 @@ const getUserById = (req, res) => {
       }, status: response.type, message: response.message
     });
   }).catch(error => {
-    const response = UserResponse.getUserError(error.errors[0].message);
+    const response = UserResponse.getUserError('User cannot be found');
     res.status(response.status).json({status: response.type, message: response.message});
   })
 };
