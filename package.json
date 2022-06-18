@@ -1,6 +1,6 @@
 {
   "name": "payment-reminder-app",
-  "version": "1.0.0",
+  "version": "1.0.8",
   "description": "SheCodes-Africa assessment test - API Infrastructure to handle automated payment reminder",
   "main": "app.js",
   "scripts": {
