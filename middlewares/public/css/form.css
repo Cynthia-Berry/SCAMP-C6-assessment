@@ -1,0 +1,86 @@
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+.auth-label {
+    color: #ccc;
+    padding: 20px 0 5px 0;
+    display: inline-block;
+}
+
+.text-center {
+    text-align: center;
+    color: white;
+}
+
+a {
+    text-decoration: none;
+    color: olive;
+}
+
+.mx-auto {
+    margin: 30px auto;
+    display: block;
+}
+
+.w-50 {
+    width: 50%;
+}
+
+.btn-primary {
+    background-color: olive;
+
+}
+
+.btn-danger {
+    background-color: #861c1c;
+}
+
+button {
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #a4a410;
+}
+
+.btn-danger:hover {
+    background-color: #c01818;
+}
+
+.auth {
+    max-width: 430px;
+    min-height: 450px;
+    overflow: hidden;
+    margin: auto;
+    padding: 20px 50px;
+    background: rgb(26, 26, 56);
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+}
+
+h2 {
+    text-align: center;
+    color: olive;
+    padding: 20px;
+}
+
+@media screen and (max-width: 450px) {
+    .auth {
+        width: 90%;
+    }
+}
+
+

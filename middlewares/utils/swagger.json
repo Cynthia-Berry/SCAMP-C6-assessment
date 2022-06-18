@@ -1,0 +1,710 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Payment Reminder Application",
+    "description": "SheCodes-Africa assessment test - API Infrastructure to handle automated payment reminder.",
+    "version": "v1",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "externalDocs": {
+    "url": "/",
+    "description": "Find more info here"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000",
+      "description": "Localhost || Development Environment"
+    }
+  ],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "tags": [
+          "Authentication Services"
+        ],
+        "summary": "API to register",
+        "responses": {
+          "200": {
+            "description": "User created successfully"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Authentication Services"
+        ],
+        "summary": "API to sign-in",
+        "responses": {
+          "200": {
+            "description": "Login successful"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/client": {
+      "get": {
+        "tags": [
+          "Client Services"
+        ],
+        "summary": "API to fetch all clients",
+        "responses": {
+          "200": {
+            "description": "Clients successfully fetched"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorised"
+          },
+          "403": {
+            "description": "Unauthenticated, Login and try again"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Auth": []
+          }
+        ]
+      }
+    },
+    "/client/:id": {
+      "get": {
+        "tags": [
+          "Client Services"
+        ],
+        "summary": "API to get a client information",
+        "responses": {
+          "200": {
+            "description": "Client successfully fetched"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorised"
+          },
+          "403": {
+            "description": "Unauthenticated, Login and try again"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Auth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Client"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/client/create": {
+      "post": {
+        "tags": [
+          "Client Services"
+        ],
+        "summary": "API to create a client",
+        "responses": {
+          "200": {
+            "description": "User successfully created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorised"
+          },
+          "403": {
+            "description": "Unauthenticated, Login and try again"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Auth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Client"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/client/:clientId": {
+      "patch": {
+        "tags": [
+          "Client Services"
+        ],
+        "summary": "API to edit a client",
+        "responses": {
+          "200": {
+            "description": "User successfully updated"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorised"
+          },
+          "403": {
+            "description": "Unauthenticated, Login and try again"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Auth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateClient"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/invoice": {
+      "get": {
+        "tags": [
+          "Invoice Services"
+        ],
+        "summary": "API to fetch all invoices",
+        "responses": {
+          "200": {
+            "description": "Invoices successfully fetched"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorised"
+          },
+          "403": {
+            "description": "Unauthenticated, Login and try again"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Auth": []
+          }
+        ]
+      }
+    },
+    "/invoice/:id": {
+      "get": {
+        "tags": [
+          "Invoice Services"
+        ],
+        "summary": "API to get a invoice",
+        "responses": {
+          "200": {
+            "description": "Invoice successfully fetched"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorised"
+          },
+          "403": {
+            "description": "Unauthenticated, Login and try again"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Auth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Client"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/invoice/create": {
+      "post": {
+        "tags": [
+          "Invoice Services"
+        ],
+        "summary": "API to create a invoice",
+        "responses": {
+          "200": {
+            "description": "Invoice successfully created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorised"
+          },
+          "403": {
+            "description": "Unauthenticated, Login and try again"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Auth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Invoice"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/invoice/:invoiceId": {
+      "patch": {
+        "tags": [
+          "Invoice Services"
+        ],
+        "summary": "API to edit a invoice",
+        "responses": {
+          "200": {
+            "description": "Invoice successfully updated"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorised"
+          },
+          "403": {
+            "description": "Unauthenticated, Login and try again"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Auth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInvoice"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user": {
+      "get": {
+        "tags": [
+          "User Services"
+        ],
+        "summary": "API to fetch all users",
+        "responses": {
+          "200": {
+            "description": "User successfully fetched"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorised"
+          },
+          "403": {
+            "description": "Unauthenticated, Login and try again"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Auth": []
+          }
+        ]
+      }
+    },
+    "/user/:id": {
+      "get": {
+        "tags": [
+          "User Services"
+        ],
+        "summary": "API to get a user information",
+        "responses": {
+          "200": {
+            "description": "User successfully updated"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorised"
+          },
+          "403": {
+            "description": "Unauthenticated, Login and try again"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Auth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/:userId": {
+      "patch": {
+        "tags": [
+          "User Services"
+        ],
+        "summary": "API to edit a user",
+        "responses": {
+          "200": {
+            "description": "User successfully updated"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorised"
+          },
+          "403": {
+            "description": "Unauthenticated, Login and try again"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Auth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUser"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "Auth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "JWT Authorization header using the JWT scheme. Enter your JWT token in the text input below. Example: 'JWT token'"
+      }
+    },
+    "responses": {
+      "Unauthorized": {
+        "description": "Error occurred, not authorised to view this resource"
+      }
+    },
+    "schemas": {
+      "Login": {
+        "required": [
+          "email",
+          "password"
+        ],
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string",
+            "minLength": 8
+          }
+        }
+      },
+      "Client": {
+        "required": [
+          "firstName",
+          "lastName",
+          "email",
+          "phone",
+          "organization",
+          "userId"
+        ],
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "organization": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateClient": {
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "organization": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          }
+        }
+      },
+      "Invoice": {
+        "required": [
+          "charge",
+          "userId",
+          "clientId"
+        ],
+        "properties": {
+          "invoiceRef": {
+            "type": "string",
+            "maxLength": 12
+          },
+          "is_paid": {
+            "type": "boolean"
+          },
+          "charge": {
+            "type": "number"
+          },
+          "discount": {
+            "type": "number"
+          },
+          "balance": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "clientId": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateInvoice": {
+        "properties": {
+          "invoiceRef": {
+            "type": "string",
+            "maxLength": 12
+          },
+          "is_paid": {
+            "type": "boolean"
+          },
+          "charge": {
+            "type": "number"
+          },
+          "discount": {
+            "type": "number"
+          },
+          "balance": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "clientId": {
+            "type": "string"
+          }
+        }
+      },
+      "User": {
+        "required": [
+          "firstName",
+          "lastName",
+          "email",
+          "phone",
+          "jobTitle",
+          "password"
+        ],
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string",
+            "maxLength": 15
+          },
+          "jobTitle": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string",
+            "minLength": 8
+          }
+        }
+      },
+      "UpdateUser": {
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string",
+            "maxLength": 15
+          },
+          "jobTitle": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string",
+            "maxLength": 8
+          }
+        }
+      }
+    }
+  }
+}

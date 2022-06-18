@@ -1,15 +1,32 @@
 const express = require('express');
 const router = express.Router();
-const {getClient, createClient, getClientById, updateClient, deleteClient} = require('../controllers/client.controller')
+const ClientController = require('../controllers/client.controller');
+const inputValidator = require('../middlewares/services/validator.service');
+const AuthValidator = require('../middlewares/helpers/validators/token.validator');
 
-router.get('/', getClient);
 
-router.post('/create', createClient);
+router.get('/',AuthValidator.verifyToken, ClientController.getClient);
 
-router.get('/:id', getClientById);
+router.post(
+  '/create',
+  AuthValidator.verifyToken,
+  inputValidator("validators", "clientRecord"),
+  ClientController.createClient
+);
 
-router.patch('/:id', updateClient);
+router.get(
+  '/:id',
+  AuthValidator.verifyToken,
+  ClientController.getClientById
+);
 
-router.delete('/:id', deleteClient);
+router.patch(
+  '/:id',
+  AuthValidator.verifyToken,
+  inputValidator("validators", "clientRecord"),
+   ClientController.updateClient
+);
+
+router.delete('/:id', AuthValidator.verifyToken, ClientController.deleteClient);
 
 module.exports = router;
