@@ -9,7 +9,6 @@ const loginValidator = Joi.object({
     "string.empty": `Password cannot be empty`,
     "string.required": `Password is required`,
   }),
-
 });
 
 const userRecord = Joi.object({
