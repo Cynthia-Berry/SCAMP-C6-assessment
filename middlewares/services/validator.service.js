@@ -26,6 +26,6 @@ module.exports = (validatorType, method) => {
 }
 
 const getValidator = (validatorType, method) => {
-  if (validatorType === "validators") return validators[method];
+  if (validatorType === "userValidators") return validators[method];
 
 }
